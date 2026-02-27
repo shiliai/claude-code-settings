@@ -1,0 +1,19 @@
+{
+  "name": "comfyui-flux",
+  "version": "1.0.0",
+  "description": "Generate images using ComfyUI with Flux models via API",
+  "author": {
+    "name": "Spotty XKL",
+    "url": "https://github.com/shiliai"
+  },
+  "homepage": "https://github.com/shiliai/claude-code-settings",
+  "repository": "https://github.com/shiliai/claude-code-settings",
+  "license": "MIT",
+  "keywords": [
+    "comfyui",
+    "flux",
+    "image-generation",
+    "local-ai",
+    "claude-code"
+  ]
+}
