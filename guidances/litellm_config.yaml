@@ -1,59 +1,63 @@
-general_settings:
-  master_key: sk-dummy
+# Disable key per upstream bug https://github.com/BerriAI/litellm/issues/19773.
+# general_settings:
+  # master_key: sk-dummy
 litellm_settings:
   drop_params: true
 model_list:
-- model_name: claude-sonnet-4.5.5
+- model_name: claude-opus-4.6
   litellm_params:
-    model: github_copilot/claude-sonnet-4.5.5
+    model: github_copilot/claude-opus-4.6
+    drop_params: true
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"
-- model_name: claude-opus-41
+- model_name: claude-opus-4.6-fast
   litellm_params:
-    model: github_copilot/claude-opus-41
+    model: github_copilot/claude-opus-4.6-fast
+    drop_params: true
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"
-- model_name: gpt-5
+- model_name: gpt-5.2-codex
+  model_info:
+    mode: responses
+    supports_vision: true
   litellm_params:
-    model: github_copilot/gpt-5
+    model: github_copilot/gpt-5.2-codex
+    drop_params: true
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"
-- model_name: claude-opus-4
+- model_name: gpt-5.2
+  model_info:
+    mode: responses
+    supports_vision: true
   litellm_params:
-    model: github_copilot/claude-opus-4
+    model: github_copilot/gpt-5.2
+    drop_params: true
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"
-- model_name: claude-sonnet-4.5
+- model_name: gpt-5.1-codex-max
+  model_info:
+    mode: responses
+    supports_vision: true
   litellm_params:
-    model: github_copilot/claude-sonnet-4.5
+    model: github_copilot/gpt-5.1-codex-max
+    drop_params: true
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"
-- model_name: "*" # All other supported models go here (e.g. gpt-5-mini, etc)
+- model_name: claude-opus-4.5
+  litellm_params:
+    model: github_copilot/claude-opus-4.5
+    drop_params: true
+    extra_headers:
+      editor-version: "vscode/1.95.0"
+      editor-plugin-version: "copilot-chat/0.26.7"
+- model_name: "*"
   litellm_params:
     model: "github_copilot/*"
     extra_headers:
-      editor-version: "vscode/1.104.3"
+      editor-version: "vscode/1.95.0"
       editor-plugin-version: "copilot-chat/0.26.7"
-      Copilot-Integration-Id: "vscode-chat"
-      user-agent: "GitHubCopilotChat/0.26.7"
-      x-github-api-version: "2025-04-01"

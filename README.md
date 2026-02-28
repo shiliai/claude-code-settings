@@ -23,17 +23,24 @@ A curated collection of Claude Code settings, custom commands, skills and sub-ag
 /plugin install youtube-transcribe-skill  # YouTube transcript extraction
 ```
 
-Alternatively, run a one-command installation via the [Claude Plugins CLI](https://claude-plugins.dev) to skip the marketplace setup:
-
-```bash
-npx claude-plugins install @feiskyer/claude-code-settings/claude-code-settings
-```
-
-This automatically adds the marketplace and installs the plugin in a single step.
-
 **Note:**
 
 - [~/.claude/settings.json](settings.json) is not configured via Claude Code Plugin, you'd need to configure it manually.
+
+### Using npx skills
+
+`npx skills` could be used to install skills only for your AI coding tools.
+
+```sh
+# List skills
+npx -y skills add -l feiskyer/claude-code-settings
+
+# Install all skills
+npx -y skills add --all feiskyer/claude-code-settings
+
+# Manually select a list of skills to install
+npx -y skills add feiskyer/claude-code-settings
+```
 
 ### Manual Setup
 
@@ -69,9 +76,12 @@ Open the link, log in and authenticate your GitHub Copilot account.
 1. The default configuration is leveraging [LiteLLM Proxy Server](https://docs.litellm.ai/docs/simple_proxy) as LLM gateway to GitHub Copilot. You can also use [copilot-api](https://github.com/ericc-ch/copilot-api) as the proxy as well (remember to change your port to 4141).
 2. Make sure the following models are available in your account; if not, replace them with your own model names:
 
-- ANTHROPIC_DEFAULT_SONNET_MODEL: claude-sonnet-4.5
-- ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-4
-- ANTHROPIC_DEFAULT_HAIKU_MODEL: gpt-5-mini
+   - ANTHROPIC_DEFAULT_SONNET_MODEL: claude-sonnet-4.5
+
+   - ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-4
+
+   - ANTHROPIC_DEFAULT_HAIKU_MODEL: gpt-5-mini
+
 
 ## Commands
 
@@ -239,6 +249,51 @@ Extract subtitles/transcripts from a YouTube video link.
 </details>
 
 <details>
+<summary>deep-research - Multi-Agent Research Orchestration</summary>
+
+### [deep-research](./skills/deep-research)
+
+Multi-agent orchestration workflow for deep research. Decomposes research goals into parallel sub-objectives, spawns `claude -p` sub-processes, aggregates results, and delivers polished reports.
+
+**Triggered by**: "深度调研", "deep research", "wide research", "multi-agent research", or systematic research needs
+
+**Key Features:**
+
+- **Multi-agent orchestration**: Splits research goals into parallel sub-tasks executed via `claude -p`
+- **Skills-first approach**: Prioritizes installed skills, then MCP tools (firecrawl → exa), then WebFetch/WebSearch
+- **Structured delivery**: Produces file-based reports with executive summaries, not chat messages
+- **Chapter-by-chapter refinement**: Iterative polishing with source verification
+- **Comprehensive logging**: Dispatcher logs, per-task logs, raw data caching
+- **Scale-aware execution**: Micro (1-2 tasks) to large (15+) with appropriate parallelization
+
+**Use Cases:**
+
+- Systematic web/document research
+- Competitive/industry analysis
+- Batch URL/dataset processing
+- Long-form writing with evidence integration
+
+**Directory Structure:**
+
+```
+.research/<name>/
+├── prompts/           # Sub-task prompts
+├── child_outputs/     # Sub-process outputs
+├── logs/              # Execution logs
+├── raw/               # Cached raw data
+└── final_report.md    # Polished deliverable
+```
+
+**Usage:**
+
+```text
+You: "深度调研一下 AI Agent 框架的现状"
+Claude: [Initiates reconnaissance, proposes sub-objectives, waits for confirmation, then orchestrates parallel research]
+```
+
+</details>
+
+<details>
 <summary>kiro-skill - Interactive Feature Development</summary>
 
 ### [kiro-skill](./skills/kiro-skill)
@@ -374,6 +429,10 @@ Configuration for using Claude Code with Azure AI Foundry native mode. Uses `CLA
 ### [minimax.json](settings/minimax.json)
 
 Configuration for using Claude Code with MiniMax API. Uses the MiniMax-M2 model.
+
+### [openrouter-settings.json](settings/openrouter-settings.json)
+
+Using Claude Code with OpenRouter API. OpenRouter provides access to many models through a unified API. Note: `ANTHROPIC_API_KEY` must be blank while `ANTHROPIC_AUTH_TOKEN` contains your OpenRouter API key.
 
 </details>
 
